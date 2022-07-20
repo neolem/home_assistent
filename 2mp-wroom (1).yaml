@@ -1,0 +1,52 @@
+esphome:
+  name: "2mp-wroom"
+
+esp32:
+  board: esp32dev
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+# encryption:
+#    key: !secret api_password
+ota:
+    password: !secret ota
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Esphome-Web-Ed33D8"
+    password: "mbbtPsMoabV6"
+
+esp32_camera:
+  name: Mobile Camera
+  external_clock:
+    pin: GPIO0
+    frequency: 20MHz
+  i2c_pins:
+    sda: GPIO26
+    scl: GPIO27
+  data_pins: [GPIO5, GPIO18, GPIO19, GPIO21, GPIO36, GPIO39, GPIO34, GPIO35]
+  vsync_pin: GPIO25
+  href_pin: GPIO23
+  pixel_clock_pin: GPIO22
+  power_down_pin: GPIO32
+  
+  max_framerate: 10 fps    # default: 10 fps, max 60
+  idle_framerate: 0.1 fps # default: 0.1 fps - framerate for 'picture' in HA dashboard
+  resolution: 160x120     # default: 640x480 (VGA) - higher res requires more memory
+  jpeg_quality: 30 
+  
+  aec_mode: manual
+  aec_value: 900
+  aec2: false
+  agc_mode: manual
+  agc_value: 2
+  wb_mode: office
+captive_portal:
+    
